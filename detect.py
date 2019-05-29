@@ -280,7 +280,7 @@ def detect_safe_search_uri(uri):
 
 
 # [START vision_text_detection]
-def detect_text(path):
+def detect_document(path):
     """Detects text in the file."""
     from google.cloud import vision
     client = vision.ImageAnnotatorClient()
@@ -302,6 +302,43 @@ def detect_text(path):
                     for vertex in text.bounding_poly.vertices])
 
         print('bounds: {}'.format(','.join(vertices)))
+
+def detect_text(path):
+    """Detects document features in an image."""
+    from google.cloud import vision
+    client = vision.ImageAnnotatorClient()
+
+    with io.open(path, 'rb') as image_file:
+        content = image_file.read()
+
+    image = vision.types.Image(content=content)
+
+    response = client.document_text_detection(image=image)
+    print(response.full_text_annotation)
+    # for page in response.full_text_annotation:
+    #     for block in page.blocks:
+    #         print(block)
+    
+
+    # for page in response.full_text_annotation.pages:
+    #     for block in page.blocks:
+    #         print('\nBlock confidence: {}\n'.format(block.confidence))
+
+    #         for paragraph in block.paragraphs:
+    #             print('Paragraph confidence: {}'.format(
+    #                 paragraph.confidence))
+
+    #             for word in paragraph.words:
+    #                 word_text = ''.join([
+    #                     symbol.text for symbol in word.symbols
+    #                 ])
+    #                 print('Word text: {} (confidence: {})'.format(
+    #                     word_text, word.confidence))
+
+    #                 for symbol in word.symbols:
+    #                     print('\tSymbol: {} (confidence: {})'.format(
+    #                         symbol.text, symbol.confidence))
+
     # [END vision_python_migration_text_detection]
 # [END vision_text_detection]
 
