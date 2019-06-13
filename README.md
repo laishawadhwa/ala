@@ -1,8 +1,12 @@
 # ala
 ## TODO
-* Vehicle Identification from Car Image
-* ID Type Verification from OCR (Cloud/Pipeline)
-* OCR on Scanned Documents 
-* Convert Required Attributes to Structured format(csv)
-* Reconciliation with the Insurance Company Database
-* Report the exceptions 
+* DL Attributes 
+  * DL No
+  * Name of Driver
+  * DOI
+  * Valid Till
+
+* Policy and Surveyor Report Attributes
+* Rotation of documents (for OCR)
+* UI for selecting the directory
+
